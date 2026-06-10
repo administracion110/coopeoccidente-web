@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CoopeOccidente - Ahorro, Crédito y Más</title>
+    <!-- Favicon -->
+    <link rel="icon" href="Logo COOPEOCCIDENTE favicon (1).png" type="image/png">
+    
+    <!-- Tailwind CSS para estilos rápidos y modernos -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Font Awesome para Iconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Configuración personalizada de Tailwind basándonos en tu logo -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        coopeblue: '#002060', /* Azul oscuro del logo */
+                        coopered: '#E3182D',  /* Rojo del logo */
+                        coopelight: '#F3F4F6'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Evitar que los textos largos rompan el diseño */
+        .editable {
+            word-break: break-word;
+            overflow-wrap: break-word;
+        }
+        /* Estilos para cuando la edición está activa */
+        .editing {
+            border: 2px dashed #E3182D !important;
+            padding: 4px;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 4px;
+            outline: none;
+            transition: all 0.3s;
+        }
+        .editing:focus {
+            background-color: #fff;
+            box-shadow: 0 0 0 3px rgba(227, 24, 45, 0.3);
+        }
+        /* Hero background con overlay */
+        .hero-bg {
+            background-image: linear-gradient(rgba(0, 32, 96, 0.85), rgba(0, 32, 96, 0.7)), url('https://images.unsplash.com/photo-1528543606781-2f6e6857f318?auto=format&fit=crop&w=1920&q=80'); /* Imagen de lago Atitlán/Guatemala */
+            background-size: cover;
+            background-position: center;
+        }
+        .guate-pattern {
+            background-image: url('data:image/svg+xml,%3Csvg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="none" fill-rule="evenodd"%3E%3Cg fill="%23e3182d" fill-opacity="0.05"%3E%3Cpath d="M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');
+        }
+    </style>
+</head>
+<body class="font-sans text-gray-800 antialiased bg-gray-50">
+
+    <!-- Top Bar -->
+    <div class="bg-coopeblue text-white text-sm py-2 px-4 hidden md:block">
+        <div class="container mx-auto flex justify-between items-center">
+            <div class="flex items-center space-x-4">
+                <span><i class="fas fa-map-marker-alt text-coopered mr-2"></i> <span class="editable" data-id="top-location">100% Guatemaltecos, sirviendo a todo el país</span></span>
+            </div>
+            <div class="flex items-center space-x-4">
+                <span><i class="fas fa-phone text-coopered mr-2"></i> <span class="editable" data-id="top-phone">PBX: 2289 0489</span></span>
+                <span><i class="fab fa-whatsapp text-green-400 mr-2"></i> <span class="editable" data-id="top-wa">WhatsApp: 5267 3085</span></span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navegación -->
+    <nav class="bg-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <!-- Logo -->
+            <a href="#" class="flex items-center">
+                <img src="Logo COOPEOCCIDENTE.jpg (1).jpeg" alt="Logo CoopeOccidente" class="h-12 md:h-16 object-contain" onerror="this.src='https://via.placeholder.com/300x80/ffffff/002060?text=COOPEOCCIDENTE'">
+            </a>
+
+            <!-- Menú Desktop -->
+            <div class="hidden md:flex items-center space-x-8 font-semibold text-coopeblue">
+                <a href="#inicio" class="hover:text-coopered transition">Inicio</a>
+                <a href="#ahorro" class="hover:text-coopered transition">Ahorro</a>
+                <a href="#credito" class="hover:text-coopered transition">Crédito</a>
+                <a href="#mision-vision" class="hover:text-coopered transition">Misión y Visión</a>
+            </div>
+
+            <!-- Menú Móvil Botón -->
+            <button class="md:hidden text-coopeblue text-2xl focus:outline-none" onclick="document.getElementById('mobileMenu').classList.toggle('hidden')">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+        
+        <!-- Menú Móvil Desplegable -->
+        <div id="mobileMenu" class="hidden md:hidden bg-white border-t border-gray-200">
+            <div class="flex flex-col px-4 py-2 space-y-2 font-semibold text-coopeblue">
+                <a href="#inicio" class="py-2 border-b border-gray-100">Inicio</a>
+                <a href="#ahorro" class="py-2 border-b border-gray-100">Ahorro</a>
+                <a href="#credito" class="py-2 border-b border-gray-100">Crédito</a>
+                <a href="#mision-vision" class="py-2 border-b border-gray-100">Misión y Visión</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header id="inicio" class="hero-bg text-white py-24 md:py-32">
+        <div class="container mx-auto px-4 flex flex-col md:flex-row items-center">
+            <div class="md:w-2/3">
+                <span class="inline-block py-1 px-3 rounded-full bg-coopered text-sm font-bold tracking-wider mb-4 editable" data-id="hero-badge">ORGULLOSAMENTE CHAPINES</span>
+                <h1 class="text-4xl md:text-6xl font-extrabold leading-tight mb-6 editable" data-id="hero-title">
+                    Tu futuro seguro,<br>nuestra misión en Guatemala.
+                </h1>
+                <p class="text-lg md:text-xl mb-8 text-gray-200 editable" data-id="hero-subtitle">
+                    Somos CoopeOccidente, tu aliado para el ahorro, el crédito y la cooperativa que impulsa a otras cooperativas a crecer en todo el país.
+                </p>
+                <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
+                    <a href="#ahorro" class="bg-coopered text-white px-8 py-3 rounded-full font-bold text-center hover:bg-red-700 transition shadow-lg text-lg">
+                        Conoce nuestras cuentas
+                    </a>
+                    <a href="#credito" class="bg-white text-coopeblue px-8 py-3 rounded-full font-bold text-center hover:bg-gray-100 transition shadow-lg text-lg">
+                        Solicita tu crédito
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Tarjetas de Información Rápida (Estilo Micoope) -->
+    <section class="relative -mt-10 z-10 container mx-auto px-4">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <!-- Card 1 -->
+            <div class="bg-white rounded-xl shadow-xl p-6 border-t-4 border-coopeblue transform transition hover:-translate-y-1">
+                <div class="bg-blue-100 w-14 h-14 rounded-full flex items-center justify-center mb-4 text-coopeblue text-2xl">
+                    <i class="fas fa-piggy-bank"></i>
+                </div>
+                <h3 class="text-xl font-bold text-coopeblue mb-2 editable" data-id="card1-title">Ahorro Programado</h3>
+                <p class="text-gray-600 mb-4 editable" data-id="card1-desc">Haz crecer tu dinero con las mejores tasas de interés del mercado guatemalteco. Tu esfuerzo vale más.</p>
+                <a href="#ahorro" class="text-coopered font-bold hover:underline">Ver opciones <i class="fas fa-arrow-right ml-1"></i></a>
+            </div>
+            <!-- Card 2 -->
+            <div class="bg-white rounded-xl shadow-xl p-6 border-t-4 border-coopered transform transition hover:-translate-y-1">
+                <div class="bg-red-100 w-14 h-14 rounded-full flex items-center justify-center mb-4 text-coopered text-2xl">
+                    <i class="fas fa-hand-holding-usd"></i>
+                </div>
+                <h3 class="text-xl font-bold text-coopeblue mb-2 editable" data-id="card2-title">Crédito Inmediato</h3>
+                <p class="text-gray-600 mb-4 editable" data-id="card2-desc">Financia tu vivienda, vehículo o negocio. Aprobación rápida y requisitos accesibles para ti.</p>
+                <a href="#credito" class="text-coopered font-bold hover:underline">Calcula tu cuota <i class="fas fa-arrow-right ml-1"></i></a>
+            </div>
+            <!-- Card 3 -->
+            <div class="bg-white rounded-xl shadow-xl p-6 border-t-4 border-coopeblue transform transition hover:-translate-y-1">
+                <div class="bg-blue-100 w-14 h-14 rounded-full flex items-center justify-center mb-4 text-coopeblue text-2xl">
+                    <i class="fas fa-network-wired"></i>
+                </div>
+                <h3 class="text-xl font-bold text-coopeblue mb-2 editable" data-id="card3-title">Red de Cooperativas</h3>
+                <p class="text-gray-600 mb-4 editable" data-id="card3-desc">Somos la cooperativa de las cooperativas. Brindamos soporte, liquidez y tecnología a instituciones aliadas.</p>
+                <a href="#red-coop" class="text-coopered font-bold hover:underline">Únete a la red <i class="fas fa-arrow-right ml-1"></i></a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección Misión y Visión -->
+    <section id="mision-vision" class="py-20 bg-gray-50 border-b border-gray-200">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+                <div class="bg-white p-8 rounded-2xl shadow-lg border-l-4 border-coopeblue">
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-bullseye text-3xl text-coopered mr-4"></i>
+                        <h3 class="text-2xl font-bold text-coopeblue editable" data-id="mision-title">Nuestra Misión</h3>
+                    </div>
+                    <p class="text-gray-600 leading-relaxed text-lg editable" data-id="mision-desc">
+                        Brindar soluciones financieras ágiles y competitivas que mejoren la calidad de vida de nuestros asociados y promuevan el desarrollo sostenible de sus comunidades, basándonos en principios de ayuda mutua y transparencia.
+                    </p>
+                </div>
+                <div class="bg-white p-8 rounded-2xl shadow-lg border-l-4 border-coopered">
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-eye text-3xl text-coopeblue mr-4"></i>
+                        <h3 class="text-2xl font-bold text-coopeblue editable" data-id="vision-title">Nuestra Visión</h3>
+                    </div>
+                    <p class="text-gray-600 leading-relaxed text-lg editable" data-id="vision-desc">
+                        Ser una cooperativa líder a nivel nacional, reconocida por su solidez financiera, innovación en servicios y compromiso inquebrantable con el crecimiento de sus asociados, consolidándonos como su principal aliado estratégico en todo el país
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección Ahorro y Crédito Principal -->
+    <section id="ahorro" class="py-20 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-extrabold text-coopeblue mb-4 editable" data-id="servicios-title">Servicios Financieros a tu Medida</h2>
+                <div class="w-24 h-1 bg-coopered mx-auto rounded-full mb-4"></div>
+                <p class="text-gray-600 max-w-2xl mx-auto editable" data-id="servicios-sub">Soluciones pensadas en el trabajador y emprendedor guatemalteco. Tu confianza es nuestro mayor respaldo.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center mb-20">
+                <div class="order-2 md:order-1">
+                    <h3 class="text-3xl font-bold text-coopeblue mb-4 editable" data-id="ahorro-title">Ahorra con Propósito</h3>
+                    <p class="text-gray-600 mb-6 text-lg editable" data-id="ahorro-desc">En CoopeOccidente entendemos que cada Quetzal ahorrado es un paso hacia tus sueños. Te ofrecemos cuentas seguras, rentables y sin cobros escondidos.</p>
+                    <ul class="space-y-4 mb-8">
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-green-500 mt-1 mr-3 text-xl"></i>
+                            <span class="text-gray-700 editable" data-id="ahorro-li1"><strong>Ahorro a la Vista:</strong> Disponibilidad inmediata de tu dinero.</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-green-500 mt-1 mr-3 text-xl"></i>
+                            <span class="text-gray-700 editable" data-id="ahorro-li2"><strong>Plazo Fijo:</strong> Las mejores tasas de interés en Guatemala para multiplicar tu capital.</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-green-500 mt-1 mr-3 text-xl"></i>
+                            <span class="text-gray-700 editable" data-id="ahorro-li3"><strong>Ahorro Infantil:</strong> Inculcando el hábito del ahorro a los más pequeños.</span>
+                        </li>
+                    </ul>
+                    <button class="bg-coopeblue text-white px-6 py-2 rounded font-bold hover:bg-blue-800 transition">Abrir mi cuenta</button>
+                </div>
+                <div class="order-1 md:order-2 rounded-2xl overflow-hidden shadow-2xl">
+                    <!-- Imagen de una familia guatemalteca o alcancía -->
+                    <img src="https://images.unsplash.com/photo-1579621970588-a35d0e7ab9b6?auto=format&fit=crop&w=800&q=80" alt="Ahorro en Guatemala" class="w-full h-auto object-cover">
+                </div>
+            </div>
+
+            <div id="credito" class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                <div class="rounded-2xl overflow-hidden shadow-2xl">
+                    <!-- Imagen de negocio o construcción -->
+                    <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&w=800&q=80" alt="Crédito para negocios" class="w-full h-auto object-cover" onerror="this.src='https://via.placeholder.com/800x600/002060/ffffff?text=Imagen+de+Creditos'">
+                </div>
+                <div>
+                    <h3 class="text-3xl font-bold text-coopeblue mb-4 editable" data-id="credito-title">Créditos que Impulsan tu Vida</h3>
+                    <p class="text-gray-600 mb-6 text-lg editable" data-id="credito-desc">No dejes que la falta de capital detenga tus proyectos. Nuestro proceso de crédito es rápido, humano y diseñado para apoyar tu desarrollo.</p>
+                    <ul class="space-y-4 mb-8">
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-coopered mt-1 mr-3 text-xl"></i>
+                            <span class="text-gray-700 editable" data-id="credito-li1"><strong>Crédito Microempresario:</strong> Impulsa tu negocio, tienda o emprendimiento.</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-coopered mt-1 mr-3 text-xl"></i>
+                            <span class="text-gray-700 editable" data-id="credito-li2"><strong>Crédito de Vivienda:</strong> Construye, compra o remodela tu hogar.</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-coopered mt-1 mr-3 text-xl"></i>
+                            <span class="text-gray-700 editable" data-id="credito-li3"><strong>Gastos Personales:</strong> Consolidación de deudas, salud o educación.</span>
+                        </li>
+                    </ul>
+                    <button class="bg-coopered text-white px-6 py-2 rounded font-bold hover:bg-red-700 transition">Solicitar Crédito</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección Especial: La Cooperativa de las Cooperativas -->
+    <section id="red-coop" class="py-20 guate-pattern bg-blue-50 relative border-y-4 border-coopeblue">
+        <div class="container mx-auto px-4 relative z-10">
+            <div class="max-w-4xl mx-auto bg-white rounded-3xl shadow-2xl overflow-hidden">
+                <div class="flex flex-col md:flex-row">
+                    <div class="bg-coopeblue text-white p-10 md:w-2/5 flex flex-col justify-center items-center text-center">
+                        <img src="Logo COOPEOCCIDENTE favicon (1).png" alt="Logo CoopeOccidente" class="w-32 h-32 object-contain mb-6 bg-white p-2 rounded-full" onerror="this.src='https://via.placeholder.com/150?text=COOPE'">
+                        <h3 class="text-2xl font-bold mb-2 editable" data-id="coop-badge">El Respaldo Institucional</h3>
+                        <p class="text-blue-200 editable" data-id="coop-badge-sub">Liderazgo y solidez financiera.</p>
+                    </div>
+                    <div class="p-10 md:w-3/5">
+                        <h2 class="text-3xl font-extrabold text-coopeblue mb-4 editable" data-id="coop-title">La Cooperativa de las Cooperativas</h2>
+                        <div class="w-16 h-1 bg-coopered mb-6"></div>
+                        <p class="text-gray-700 mb-6 text-lg leading-relaxed editable" data-id="coop-desc">
+                            Nuestra visión va más allá del servicio individual. En <strong>CoopeOccidente</strong>, nos enorgullece ser el pilar de apoyo para otras cooperativas en Guatemala. 
+                            Brindamos asesoría, tecnología y fortalecimiento institucional para que juntos hagamos crecer el ecosistema cooperativo nacional.
+                        </p>
+                        <div class="grid grid-cols-2 gap-4 mb-6">
+                            <div class="bg-gray-50 p-4 rounded-lg border border-gray-100">
+                                <i class="fas fa-handshake text-coopered text-2xl mb-2"></i>
+                                <h4 class="font-bold text-coopeblue editable" data-id="coop-f1">Asesoría Especializada</h4>
+                            </div>
+                            <div class="bg-gray-50 p-4 rounded-lg border border-gray-100">
+                                <i class="fas fa-laptop-code text-coopered text-2xl mb-2"></i>
+                                <h4 class="font-bold text-coopeblue editable" data-id="coop-f2">Tecnología</h4>
+                            </div>
+                        </div>
+                        <a href="#contacto" class="inline-block border-2 border-coopeblue text-coopeblue px-6 py-2 rounded font-bold hover:bg-coopeblue hover:text-white transition">Afiliar a mi Cooperativa</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Final -->
+    <section class="bg-coopered text-white py-16">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold mb-4 editable" data-id="cta-title">¿Listo para ser parte de la familia CoopeOccidente?</h2>
+            <p class="text-xl mb-8 text-red-100 editable" data-id="cta-desc">Únete a miles de guatemaltecos que ya están construyendo un futuro mejor con nosotros.</p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contacto" class="bg-coopeblue text-white pt-16 pb-8 border-t-[10px] border-coopered">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
+                <div class="col-span-1 md:col-span-1">
+                    <img src="Logo COOPEOCCIDENTE.jpg (1).jpeg" alt="Logo" class="bg-white p-2 rounded mb-4 h-16 object-contain" onerror="this.src='https://via.placeholder.com/200x60/ffffff/002060?text=COOPEOCCIDENTE'">
+                    <p class="text-sm text-blue-200 mb-4 editable" data-id="footer-about">
+                        Ahorro, crédito y más. Comprometidos con el desarrollo económico y social de Guatemala a través del cooperativismo.
+                    </p>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-bold mb-4 text-white border-b border-blue-800 pb-2">Servicios</h4>
+                    <ul class="space-y-2 text-blue-200">
+                        <li><a href="#" class="hover:text-white transition">Cuentas de Ahorro</a></li>
+                        <li><a href="#" class="hover:text-white transition">Servicios Institucionales</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-bold mb-4 text-white border-b border-blue-800 pb-2">Enlaces Útiles</h4>
+                    <ul class="space-y-2 text-blue-200">
+                        <li><a href="#" class="hover:text-white transition">Calculadora de Cuotas</a></li>
+                        <li><a href="#" class="hover:text-white transition">Agencias y Horarios</a></li>
+                        <li><a href="#" class="hover:text-white transition">Tasas de Interés</a></li>
+                        <li><a href="#" class="hover:text-white transition">Educación Financiera</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-lg font-bold mb-4 text-white border-b border-blue-800 pb-2">Contáctanos</h4>
+                    <ul class="space-y-3 text-blue-200">
+                        <li class="flex items-start">
+                            <i class="fas fa-map-marker-alt mt-1 mr-3 text-coopered"></i>
+                            <span class="editable" data-id="footer-address">Avenida Reforma Montufar 12-01 Edificio Reforma Montufar Torre B oficina 202</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-phone mr-3 text-coopered"></i>
+                            <span class="editable" data-id="footer-phone">PBX: 2289 0489</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-envelope mr-3 text-coopered"></i>
+                            <span class="editable" data-id="footer-email">administracion@coopeoccidenterl.com</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-blue-800 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p id="secret-trigger" class="text-sm text-blue-300 mb-4 md:mb-0 cursor-default select-none">
+                    &copy; <script>document.write(new Date().getFullYear())</script> CoopeOccidente R.L. Todos los derechos reservados.
+                </p>
+                <div class="flex space-x-4">
+                    <a href="#" class="w-10 h-10 rounded-full bg-blue-800 flex items-center justify-center hover:bg-coopered transition">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Panel de Edición Flotante (Botón Mágico) -->
+    <div id="adminPanel" class="fixed bottom-6 right-6 z-50 hidden flex-col items-end space-y-2">
+        <div id="saveNotification" class="hidden bg-green-500 text-white px-4 py-2 rounded shadow-lg text-sm font-bold transition-opacity duration-300 opacity-0">
+            ¡Cambios Guardados Exitosamente!
+        </div>
+        <button id="toggleEditBtn" class="bg-gray-800 text-white px-6 py-3 rounded-full shadow-2xl hover:bg-gray-700 transition font-bold flex items-center border-2 border-white">
+            <i class="fas fa-edit mr-2" id="editIcon"></i> 
+            <span id="editBtnText">Editar Textos</span>
+        </button>
+    </div>
+
+    <!-- Modal de Contraseña Personalizado (Nuevo) -->
+    <div id="passwordModal" class="fixed inset-0 bg-black bg-opacity-60 z-[60] hidden flex items-center justify-center backdrop-blur-sm">
+        <div class="bg-white p-6 rounded-2xl shadow-2xl max-w-sm w-full mx-4 border-t-4 border-coopered transform transition-all">
+            <h3 class="text-xl font-bold text-coopeblue mb-2"><i class="fas fa-lock mr-2 text-coopered"></i>Seguridad</h3>
+            <p class="text-gray-600 mb-4 text-sm">Ingresa la contraseña de administrador:</p>
+            <input type="password" id="adminPassword" class="w-full border-2 border-gray-300 rounded-lg px-4 py-2 mb-4 focus:outline-none focus:border-coopeblue" placeholder="••••••••">
+            <div class="flex justify-end space-x-3">
+                <button id="cancelPwdBtn" class="px-4 py-2 text-gray-600 hover:bg-gray-100 rounded-lg transition font-semibold">Cancelar</button>
+                <button id="submitPwdBtn" class="px-4 py-2 bg-coopered text-white rounded-lg hover:bg-red-700 transition font-bold shadow-md">Entrar</button>
+            </div>
+            <p id="pwdError" class="text-red-500 text-sm mt-3 hidden font-semibold"><i class="fas fa-exclamation-circle mr-1"></i>Contraseña incorrecta.</p>
+        </div>
+    </div>
+
+    <!-- Alerta Personalizada (Nuevo) -->
+    <div id="customAlert" class="fixed top-6 left-1/2 transform -translate-x-1/2 z-[70] hidden bg-coopeblue text-white px-6 py-3 rounded-full shadow-2xl font-bold transition-opacity duration-300 opacity-0 border-2 border-white">
+    </div>
+
+    <!-- Script de Funcionalidad -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const toggleBtn = document.getElementById('toggleEditBtn');
+            const editBtnText = document.getElementById('editBtnText');
+            const editIcon = document.getElementById('editIcon');
+            const saveNotification = document.getElementById('saveNotification');
+            const editableElements = document.querySelectorAll('.editable');
+            const adminPanel = document.getElementById('adminPanel');
+            const secretTrigger = document.getElementById('secret-trigger');
+            
+            let isEditing = false;
+            let clickCount = 0;
+            let clickTimer; // Para controlar el tiempo de los clics
+
+            // Función para mostrar alertas visuales en pantalla
+            function showCustomAlert(message) {
+                const alertBox = document.getElementById('customAlert');
+                alertBox.innerHTML = message;
+                alertBox.classList.remove('hidden');
+                setTimeout(() => alertBox.classList.replace('opacity-0', 'opacity-100'), 10);
+                setTimeout(() => {
+                    alertBox.classList.replace('opacity-100', 'opacity-0');
+                    setTimeout(() => alertBox.classList.add('hidden'), 300);
+                }, 3000);
+            }
+
+            // --- TRUCO SECRETO PARA MOSTRAR EL BOTÓN ---
+            secretTrigger.addEventListener('click', () => {
+                clickCount++;
+                clearTimeout(clickTimer); // Limpiar el temporizador si vuelve a hacer clic rápido
+                
+                if (clickCount === 3) {
+                    if (adminPanel.classList.contains('hidden')) {
+                        // Mostrar nuestra ventana de contraseña elegante
+                        document.getElementById('passwordModal').classList.remove('hidden');
+                        document.getElementById('adminPassword').value = '';
+                        document.getElementById('pwdError').classList.add('hidden');
+                        setTimeout(() => document.getElementById('adminPassword').focus(), 100);
+                    } else {
+                        // Si ya estaba visible, lo ocultamos
+                        adminPanel.classList.add('hidden');
+                        adminPanel.classList.remove('flex');
+                        showCustomAlert("<i class='fas fa-lock mr-2'></i>Modo Administrador oculto.");
+                    }
+                    clickCount = 0;
+                } else {
+                    // Damos 1.5 segundos para completar los 3 clics
+                    clickTimer = setTimeout(() => { clickCount = 0; }, 1500);
+                }
+            });
+
+            // --- LÓGICA DE LA VENTANA DE CONTRASEÑA ---
+            document.getElementById('cancelPwdBtn').addEventListener('click', () => {
+                document.getElementById('passwordModal').classList.add('hidden');
+            });
+
+            // Permitir usar "Enter" en el teclado para aceptar
+            document.getElementById('adminPassword').addEventListener('keypress', (e) => {
+                if(e.key === 'Enter') document.getElementById('submitPwdBtn').click();
+            });
+
+            document.getElementById('submitPwdBtn').addEventListener('click', () => {
+                const password = document.getElementById('adminPassword').value;
+                if (password === "Coope2026") {
+                    document.getElementById('passwordModal').classList.add('hidden');
+                    adminPanel.classList.remove('hidden');
+                    adminPanel.classList.add('flex');
+                    showCustomAlert("<i class='fas fa-unlock mr-2'></i>¡Contraseña correcta!");
+                } else {
+                    document.getElementById('pwdError').classList.remove('hidden');
+                }
+            });
+
+            // 1. Cargar textos guardados al iniciar
+            editableElements.forEach(el => {
+                const elementId = el.getAttribute('data-id');
+                const savedText = localStorage.getItem('coope_' + elementId);
+                if (savedText) {
+                    el.innerHTML = savedText;
+                }
+            });
+
+            // 2. Lógica del botón Editar/Guardar
+            toggleBtn.addEventListener('click', () => {
+                isEditing = !isEditing;
+
+                if (isEditing) {
+                    // MODO EDICIÓN
+                    toggleBtn.classList.replace('bg-gray-800', 'bg-green-600');
+                    toggleBtn.classList.replace('hover:bg-gray-700', 'hover:bg-green-500');
+                    editIcon.classList.replace('fa-edit', 'fa-save');
+                    editBtnText.textContent = "Guardar Cambios";
+
+                    editableElements.forEach(el => {
+                        el.contentEditable = "true";
+                        el.classList.add('editing');
+                    });
+                    
+                    // Notificar al usuario cómo editar usando la alerta elegante
+                    showCustomAlert("Modo edición activado. Toca los textos punteados.");
+
+                } else {
+                    // MODO GUARDAR
+                    toggleBtn.classList.replace('bg-green-600', 'bg-gray-800');
+                    toggleBtn.classList.replace('hover:bg-green-500', 'hover:bg-gray-700');
+                    editIcon.classList.replace('fa-save', 'fa-edit');
+                    editBtnText.textContent = "Editar Textos";
+
+                    editableElements.forEach(el => {
+                        el.contentEditable = "false";
+                        el.classList.remove('editing');
+                        
+                        // Guardar en LocalStorage
+                        const elementId = el.getAttribute('data-id');
+                        localStorage.setItem('coope_' + elementId, el.innerHTML);
+                    });
+
+                    // Mostrar notificación de guardado
+                    saveNotification.classList.remove('hidden');
+                    setTimeout(() => saveNotification.classList.replace('opacity-0', 'opacity-100'), 10);
+                    
+                    setTimeout(() => {
+                        saveNotification.classList.replace('opacity-100', 'opacity-0');
+                        setTimeout(() => saveNotification.classList.add('hidden'), 300);
+                    }, 3000);
+                }
+            });
+            
+            // Evitar que el diseño se rompa al escribir o pegar texto
+            editableElements.forEach(el => {
+                // 1. Prevenir saltos de línea con "Enter" para no desarmar la estructura
+                el.addEventListener('keypress', (e) => {
+                    if (e.key === 'Enter') {
+                        e.preventDefault(); 
+                    }
+                });
+
+                // 2. Limpiar el formato al pegar texto (evita que se peguen otros colores o tamaños de letra)
+                el.addEventListener('paste', (e) => {
+                    e.preventDefault();
+                    const text = (e.clipboardData || window.clipboardData).getData('text/plain');
+                    document.execCommand('insertText', false, text);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
